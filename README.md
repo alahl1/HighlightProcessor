@@ -52,9 +52,16 @@ You will not be able to retrieve your secret access key so if you don't have tha
 # Step 1: Create an IAM role or user
 
 In the search bar type "IAM" 
+
 Click Roles -> Create Role
+
 For the Use Case enter "S3" and click next
+
 Under Add Permission search for AmazonS3FullAccess, MediaConvertFullAccess and AmazonEC2ContainerRegistryFullAccess and click next
+
+Under Role Details, enter "HighlightProcessorRole" as the name
+
+Under Step 1: Select Trusted Entities
 Edit the Trust Policy and replace it with this:
 
 {
