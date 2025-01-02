@@ -98,7 +98,7 @@ aws s3 ls
 
 Create the Project Directory: "mkdir game-highlight-processor cd game-highlight-processor"
 
-Create the Necessary Files: "touch Dockerfile fetch.py requirements.txt process_one_video.py mediaconvert_process.py"
+Create the Necessary Files: "touch Dockerfile fetch.py requirements.txt process_one_video.py mediaconvert_process.py run_all.py"
 
 Add code to the files In the CLI enter "nano fetch.py"
 
@@ -127,6 +127,10 @@ Reminder to replace your S3bucket name, mediaconvert endpoint & your account ID(
 
 Exit and Save file
 
+In CLI enter nano "run_all.py" Paste the code found within the run_all.py file on Github into the blank area 
+
+Exit and Save file
+
 # Step 4: Build and Run the Docker Container
 Run:
 "docker build -t highlight-processor ."
@@ -137,16 +141,8 @@ docker run -e AWS_ACCESS_KEY_ID=<your-access-key-id> \
            -e AWS_DEFAULT_REGION=us-east-1 \
            highlight-processor
            
-This will run fetch.py and there should be a file saved in your S3 bucket now
-
-# Step 5: Process A Video From basketball_highlights.json
-Run the process_one_video script
-"python3 process_one_video.py"
+This will run fetch.py, process_one_video.py and mediaconvert_process.py and the following files should be saved in your S3 bucket:
 
 Optional - Confirm there is a video uploaded to s3://<your-bucket-name>/videos/first_video.mp4
-
-# Step 6: Use AWS MediaConvert to convert the file
-Run mediaconvert_process.py
-"python3 mediaconvert_process.py"
 
 Optional - Confirm there is a video uploaded to s3://<your-bucket-name>/processed_videos/
