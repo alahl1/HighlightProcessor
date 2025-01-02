@@ -61,7 +61,11 @@ Under Add Permission search for AmazonS3FullAccess, MediaConvertFullAccess and A
 
 Under Role Details, enter "HighlightProcessorRole" as the name
 
-Under Step 1: Select Trusted Entities
+Select Create Role
+
+Find the role in the list and click on it
+Under Trust relationships
+Edit the trust policy to this:
 Edit the Trust Policy and replace it with this:
 
 {
@@ -75,28 +79,27 @@ Edit the Trust Policy and replace it with this:
           "ecs-tasks.amazonaws.com",
           "mediaconvert.amazonaws.com"
         ],
-        "AWS": "arn:aws:iam::<your-account-id>:user/<your-iam-user>"
+        "AWS": "arn:aws:iam::<"your-account-id">:user/<"your-iam-user">"
       },
       "Action": "sts:AssumeRole"
     }
   ]
 }
 
-Select Create Role
-
-
 # Step 2: Create S3 Bucket
 Navigate to the AWS Cloudshell console
-Run this bash script to create an S3 Bucket, be sure to replace <your-bucket-name> and <region>
+Run this bash script to create an S3 Bucket, be sure to replace "<your-bucket-name>" and "<region>"
 
-"aws s3api create-bucket --bucket <your-bucket-name> --region <region> --create-bucket-configuration LocationConstraint=<region>"
+"aws s3api create-bucket --bucket <"your-bucket-name"> --region <"region">"
 
 Verify the bucket exists
 aws s3 ls
 
 # Step 3: Set Up Project
 
-Create the Project Directory: "mkdir game-highlight-processor cd game-highlight-processor"
+Create the Project Directory: "mkdir game-highlight-processor"
+
+"cd game-highlight-processor"
 
 Create the Necessary Files: "touch Dockerfile fetch.py requirements.txt process_one_video.py mediaconvert_process.py run_all.py"
 
@@ -136,8 +139,8 @@ Run:
 "docker build -t highlight-processor ."
 
 Run the Docker Container Locally:
-docker run -e AWS_ACCESS_KEY_ID=<your-access-key-id> \
-           -e AWS_SECRET_ACCESS_KEY=<your-secret-access-key> \
+docker run -e AWS_ACCESS_KEY_ID=<"your-access-key-id"> \
+           -e AWS_SECRET_ACCESS_KEY=<"your-secret-access-key"> \
            -e AWS_DEFAULT_REGION=us-east-1 \
            highlight-processor
            
